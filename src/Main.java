@@ -65,7 +65,6 @@ public class Main {
 
     // Main program
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         char[][] matrix = createMatrix(3);
         printMatrix(matrix);
         int[] user1loc = getUserLoc();
