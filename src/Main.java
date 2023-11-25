@@ -101,7 +101,7 @@ public class Main {
                 System.out.println("X - you are the winner !!!");
                 break;
             }
-            if (isMatrixFull(matrix)){
+            if (isMatrixFull(matrix)) {
                 System.out.println("Matrix is full - No winner");
                 break;
             }
@@ -110,16 +110,11 @@ public class Main {
                 System.out.println("O - you are the winner !!!");
                 break;
             }
-            if (isMatrixFull(matrix)){
+            if (isMatrixFull(matrix)) {
                 System.out.println("Matrix is full - No winner");
                 break;
             }
         }
-
-
-
-        setXO('O', matrix);
-
 
     }
 }
