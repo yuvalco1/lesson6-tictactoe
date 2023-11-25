@@ -94,9 +94,9 @@ public class Main {
     // Main program
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        char[][] matrix = createMatrix(3);
         boolean runAgain = true;
         while (runAgain) {
+            char[][] matrix = createMatrix(3);
             System.out.println("Welcome to the TicTacToe game, Let's get started");
             printMatrix(matrix);
             while (!isMatrixFull(matrix)) {
@@ -118,15 +118,12 @@ public class Main {
                     System.out.println("Matrix is full - No winner, we have a tie.");
                     break;
                 }
-                System.out.println("Do you want to play again[Y/N]?");
-                char c = scanner.next().charAt(0);
-                if (c == 'N' | c == 'n') {
-                    runAgain = false;
-                }
-
-
             }
-
+            System.out.println("Do you want to play again[Y/N]?");
+            char c = scanner.next().charAt(0);
+            if (c == 'N' | c == 'n') {
+                runAgain = false;
+            }
         }
     }
 }
