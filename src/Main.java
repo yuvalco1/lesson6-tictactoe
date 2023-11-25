@@ -53,15 +53,16 @@ public class Main {
 
     // User X,O to choose location to fill +validate
     public static void setXO(char XO, char[][] matrix) {
-        System.out.println("User " + XO + " - it is your turn");
-        int[] loc = getUserLoc();
-        while (!isLocEmpty(loc, matrix)) {
-            System.out.println("location ia not empty, please try again");
+        int[] loc;
+        do {
+            System.out.println("User " + XO + " - it is your turn");
             loc = getUserLoc();
-        }
+            if (!isLocEmpty(loc, matrix)) {
+                System.out.println("location ia not empty, please try again");
+            }
+        } while (!isLocEmpty(loc, matrix));
         matrix[loc[0]][loc[1]] = XO;
         printMatrix(matrix);
-
     }
 
 
