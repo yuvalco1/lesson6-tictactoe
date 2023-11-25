@@ -24,19 +24,19 @@ public class Main {
 
     // get input location to fill from user and validate.
 
-    public static int[] getUserLoc(){
-        int [] userloc = new int[2];
+    public static int[] getUserLoc() {
+        int[] userloc = new int[2];
         Scanner scanner = new Scanner(System.in);
-        System.out.println("please enter row number[1 to 3]: ");
+        System.out.println("please enter row number[0 to 2]: ");
         int row = scanner.nextInt();
-        while (row<1 | row>3){
-            System.out.println("Row must be in range of 1 to 3, please re-enter");
+        while (row < 0 | row > 2) {
+            System.out.println("Row must be in range of 0 to 2, please re-enter");
             row = scanner.nextInt();
         }
-        System.out.println("please enter column number[1 to 3]: ");
+        System.out.println("please enter column number[0 to 2]: ");
         int col = scanner.nextInt();
-        while (col<1 | col>3){
-            System.out.println("Column must be in range of 1 to 3, please re-enter");
+        while (col < 0 | col > 2) {
+            System.out.println("Column must be in range of 0 to 2, please re-enter");
             col = scanner.nextInt();
         }
         userloc[0] = row;
@@ -45,7 +45,37 @@ public class Main {
     }
 
 
+    // check if matrix location is empty
+    public static boolean isLocEmpty(int[] loc, char[][] matrix) {
+        return ((matrix[loc[0]][loc[1]]) == '_');
+    }
 
+
+    // User X,O to choose location to fill +validate
+    public static void setXO(char XO, char[][] matrix) {
+        System.out.println("User " + XO + " - it is your turn");
+        int[] loc = getUserLoc();
+        while (!isLocEmpty(loc, matrix)) {
+            System.out.println("location ia not empty, please try again");
+            loc = getUserLoc();
+        }
+        matrix[loc[0]][loc[1]] = XO;
+        printMatrix(matrix);
+
+    }
+
+
+    public static boolean checkWinXO(char XO, char[][] matrix) {
+        return ((matrix[0][0] == XO) && (matrix[0][1] == XO) && (matrix[0][2] == XO)) |
+                ((matrix[1][0] == XO) && (matrix[1][1] == XO) && (matrix[1][2] == XO)) |
+                ((matrix[2][0] == XO) && (matrix[2][1] == XO) && (matrix[2][2] == XO)) |
+                ((matrix[0][0] == XO) && (matrix[1][0] == XO) && (matrix[2][0] == XO)) |
+                ((matrix[0][1] == XO) && (matrix[1][1] == XO) && (matrix[2][1] == XO)) |
+                ((matrix[0][2] == XO) && (matrix[1][2] == XO) && (matrix[2][2] == XO)) |
+                ((matrix[0][0] == XO) && (matrix[1][1] == XO) && (matrix[2][2] == XO)) |
+                ((matrix[0][2] == XO) && (matrix[1][1] == XO) && (matrix[2][0] == XO));
+
+    }
 
     // Check if matrix is full
     public static boolean isMatrixFull(char[][] matrix) {
@@ -60,16 +90,35 @@ public class Main {
     }
 
 
-
-
-
     // Main program
     public static void main(String[] args) {
         char[][] matrix = createMatrix(3);
+        System.out.println("Welcome to the TicTacToe game, Let's get started");
         printMatrix(matrix);
-        int[] user1loc = getUserLoc();
-        System.out.println(Arrays.toString(user1loc));
+        while (!isMatrixFull(matrix)) {
+            setXO('X', matrix);
+            if (checkWinXO('X', matrix)) {
+                System.out.println("X - you are the winner !!!");
+                break;
+            }
+            if (isMatrixFull(matrix)){
+                System.out.println("Matrix is full - No winner");
+                break;
+            }
+            setXO('O', matrix);
+            if (checkWinXO('O', matrix)) {
+                System.out.println("O - you are the winner !!!");
+                break;
+            }
+            if (isMatrixFull(matrix)){
+                System.out.println("Matrix is full - No winner");
+                break;
+            }
+        }
 
+
+
+        setXO('O', matrix);
 
 
     }
