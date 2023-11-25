@@ -65,6 +65,7 @@ public class Main {
     }
 
 
+    // check if user X or O has met win condition - return boolean True or False
     public static boolean checkWinXO(char XO, char[][] matrix) {
         return ((matrix[0][0] == XO) && (matrix[0][1] == XO) && (matrix[0][2] == XO)) |
                 ((matrix[1][0] == XO) && (matrix[1][1] == XO) && (matrix[1][2] == XO)) |
@@ -92,29 +93,40 @@ public class Main {
 
     // Main program
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
         char[][] matrix = createMatrix(3);
-        System.out.println("Welcome to the TicTacToe game, Let's get started");
-        printMatrix(matrix);
-        while (!isMatrixFull(matrix)) {
-            setXO('X', matrix);
-            if (checkWinXO('X', matrix)) {
-                System.out.println("X - you are the winner !!!");
-                break;
-            }
-            if (isMatrixFull(matrix)) {
-                System.out.println("Matrix is full - No winner");
-                break;
-            }
-            setXO('O', matrix);
-            if (checkWinXO('O', matrix)) {
-                System.out.println("O - you are the winner !!!");
-                break;
-            }
-            if (isMatrixFull(matrix)) {
-                System.out.println("Matrix is full - No winner");
-                break;
-            }
-        }
+        boolean runAgain = true;
+        while (runAgain) {
+            System.out.println("Welcome to the TicTacToe game, Let's get started");
+            printMatrix(matrix);
+            while (!isMatrixFull(matrix)) {
+                setXO('X', matrix);
+                if (checkWinXO('X', matrix)) {
+                    System.out.println("X - you are the winner !!!");
+                    break;
+                }
+                if (isMatrixFull(matrix)) {
+                    System.out.println("Matrix is full - No winner, we have a tie.");
+                    break;
+                }
+                setXO('O', matrix);
+                if (checkWinXO('O', matrix)) {
+                    System.out.println("O - you are the winner !!!");
+                    break;
+                }
+                if (isMatrixFull(matrix)) {
+                    System.out.println("Matrix is full - No winner, we have a tie.");
+                    break;
+                }
+                System.out.println("Do you want to play again[Y/N]?");
+                char c = scanner.next().charAt(0);
+                if (c == 'N' | c == 'n') {
+                    runAgain = false;
+                }
 
+
+            }
+
+        }
     }
 }
